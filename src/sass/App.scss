@@ -1,0 +1,46 @@
+@import "design-system";
+@import "toggleColorTheme";
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html{
+    font-size: 62.5%;
+}
+body{
+    width: 100vw;
+    height: 100vh;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+#root{
+    width: 100%;
+    min-height: 100%;
+    background-color: $grey-50;
+    @include flex(column, flex-start, center);
+}
+.container{
+    width: 100%;
+    @include flex(column, flex-start, center);
+}
+.header{
+    padding: 1.6rem 2.4rem;
+    width: 100%;
+    @include flex(row, space-between, center);
+}
+.main{
+    width: 100%;
+    padding: 3.2rem 2.4rem;
+    @include flex(column, flex-start, center);
+    gap: 4rem 0;
+}
+.btn{
+    width: 100%;
+    border: none;
+}
+
+
+
+
