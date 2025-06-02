@@ -112,12 +112,296 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  gap: 4rem 0;
+}
+@media screen and (max-width: 450px) {
+  .main {
+    gap: 4rem 0;
+  }
+}
+@media screen and (min-width: 450px) and (max-width: 1024px) {
+  .main {
+    gap: 6.4rem 0;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .main {
+    gap: 0 12.8rem;
+  }
+}
+
+.buttonGroup {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1.6rem 0;
+}
+@media screen and (min-width: 450px) and (max-width: 1024px) {
+  .buttonGroup {
+    gap: 2.4rem 0;
+  }
+}
+
+.startMenuTextContainer {
+  width: 100%;
+  text-align: left;
+  color: #313E51;
+}
+.startMenuTextContainer .subtitle {
+  margin-bottom: 1.6rem;
+  font-family: "Rubik";
+  font-size: 6.4rem;
+  font-weight: 300;
+  line-height: 100%;
+  letter-spacing: 0;
+}
+@media screen and (max-width: 450px) {
+  .startMenuTextContainer .subtitle {
+    font-family: "Rubik";
+    font-size: 6.4rem;
+    font-weight: 300;
+    line-height: 100%;
+    letter-spacing: 0;
+    font-size: 4rem;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .startMenuTextContainer .subtitle {
+    margin-bottom: 4.8rem;
+  }
+}
+.startMenuTextContainer .title {
+  margin-top: 0.8rem;
+  font-family: "Rubik";
+  font-size: 6.4rem;
+  font-weight: 500;
+  line-height: 100%;
+  letter-spacing: 0;
+}
+@media screen and (max-width: 450px) {
+  .startMenuTextContainer .title {
+    font-family: "Rubik";
+    font-size: 6.4rem;
+    font-weight: 500;
+    line-height: 100%;
+    letter-spacing: 0;
+    font-size: 4rem;
+  }
+}
+.startMenuTextContainer .description {
+  color: #626C7F;
+  font-family: "Rubik";
+  font-size: 2rem;
+  font-style: italic;
+  line-height: 150%;
+  letter-spacing: 0;
+}
+@media screen and (max-width: 450px) {
+  .startMenuTextContainer .description {
+    font-family: "Rubik";
+    font-size: 2.4rem;
+    font-weight: 500;
+    line-height: 150%;
+    letter-spacing: 0;
+    font-size: 1.4rem;
+    font-style: italic;
+    font-weight: 400;
+  }
 }
 
 .btn {
   width: 100%;
   border: none;
+}
+
+.submitButton {
+  padding: 0 3.2rem;
+  background-color: #A729F5;
+  color: #FFFFFF;
+}
+
+.optionButton {
+  padding: 1.6rem 1.6rem;
+  background-color: #FFFFFF;
+  box-shadow: 0 1.6rem 4rem 0 rgba(143, 160, 193, 0.14);
+  border-radius: 2.4rem;
+  text-align: left;
+  font-family: "Rubik";
+  font-size: 2.8rem;
+  font-weight: 500;
+  line-height: 100%;
+  letter-spacing: 0;
+}
+@media screen and (min-width: 1024px) {
+  .optionButton {
+    padding: 2.4rem 2.4rem;
+  }
+}
+@media screen and (max-width: 450px) {
+  .optionButton {
+    border-radius: 1.2rem;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0 3.2rem;
+  color: #313E51;
+}
+@media screen and (max-width: 450px) {
+  .content {
+    font-family: "Rubik";
+    font-size: 2.8rem;
+    font-weight: 500;
+    line-height: 100%;
+    letter-spacing: 0;
+    font-size: 1.8rem;
+    gap: 0 1.6rem;
+  }
+}
+
+.iconContainer {
+  width: 5.6rem;
+  height: 5.6rem;
+  border-radius: 1.2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.iconContainer svg {
+  width: 4rem;
+  height: 4rem;
+}
+.iconContainer.HTML {
+  background-color: #FFF5ED;
+}
+.iconContainer.CSS {
+  background-color: #E0FDEF;
+}
+.iconContainer.Javascript {
+  background-color: #EBF0FF;
+}
+.iconContainer.Accessibility {
+  background-color: #F6E7FF;
+}
+@media screen and (max-width: 450px) {
+  .iconContainer {
+    width: 4rem;
+    height: 4rem;
+  }
+  .iconContainer svg {
+    width: 2.8rem;
+    height: 2.8rem;
+  }
+}
+
+.questionContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+@media screen and (max-width: 450px) {
+  .questionContainer {
+    gap: 2.4rem 0;
+  }
+}
+@media screen and (min-width: 450px) and (max-width: 1024px) {
+  .questionContainer {
+    gap: 4rem 0;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .questionContainer {
+    gap: 0 18.4rem;
+  }
+}
+
+.questionTextContainer {
+  width: 100%;
+  gap: 2.4rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+@media screen and (max-width: 450px) {
+  .questionTextContainer {
+    gap: 1.6rem 0;
+  }
+}
+
+.questionNum {
+  color: #626C7F;
+  font-family: "Rubik";
+  font-size: 2rem;
+  font-style: italic;
+  line-height: 150%;
+  letter-spacing: 0;
+}
+@media screen and (max-width: 450px) {
+  .questionNum {
+    font-family: "Rubik";
+    font-size: 2.4rem;
+    font-weight: none;
+    line-height: 150%;
+    letter-spacing: 0;
+    font-size: 1.4rem;
+    font-style: italic;
+    font-weight: 400;
+  }
+}
+
+.questionText {
+  color: #313E51;
+  font-family: "Rubik";
+  font-size: 3.6rem;
+  font-weight: 500;
+  line-height: 120%;
+  letter-spacing: 0;
+}
+@media screen and (max-width: 450px) {
+  .questionText {
+    font-family: "Rubik";
+    font-size: 3.6rem;
+    font-weight: 500;
+    line-height: 120%;
+    letter-spacing: 0;
+    font-size: 2rem;
+  }
+}
+
+.progressBarContainer {
+  width: 100%;
+}
+.progressBarContainer progress {
+  width: 100%;
+}
+.progressBarContainer progress[value] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+}
+.progressBarContainer progress[value]::-webkit-progress-bar {
+  height: 1.6rem;
+  padding: 0.4rem;
+  border-radius: 100rem;
+  background: #FFFFFF;
+}
+.progressBarContainer progress[value]::-webkit-progress-value {
+  border-radius: 100rem;
+  background: #A729F5;
+}
+.progressBarContainer progress[value]::-moz-progress-bar {
+  border-radius: 100rem;
+  background: #A729F5;
 }
 
 /*# sourceMappingURL=App.css.map */

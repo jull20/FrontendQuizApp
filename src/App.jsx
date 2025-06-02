@@ -1,19 +1,44 @@
+import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './css/App.css';
-import StartMenu from "./components/StartMenu"
-import Question from "./components/Question"
-import Score from "./components/Score"
-function App() {
+import StartMenu from "./pages/StartMenu"
+import Question from "./pages/Question"
+import Score from "./pages/Score"
+
+
+export default function App() {
+  const [quizName, setquizName] = useState("");
   return (
-    <BrowserRouter>
-    <Routes>
-      {/* подстановочный путь */}
-      <Route path="*"        element={<StartMenu></StartMenu>} />
-      <Route path="question" element={<Question></Question>} />
-      <Route path="score"    element={<Score></Score>} />
-    </Routes>
-  </BrowserRouter>
+    <div className='container'>
+        <Header quizName={quizName}></Header>
+        <BrowserRouter>
+          <Routes>
+            <Route path="*"        element={<StartMenu onQuizName={setquizName}></StartMenu>} />
+            <Route path="question" element={<Question quizName={quizName}></Question>} />
+            <Route path="score"    element={<Score></Score>} />
+          </Routes>
+        </BrowserRouter>
+    </div>
   );
 }
 
-export default App;
+
+function Header({quizName}){
+    return (
+        <header className="header">
+            <div className="quizName">
+                <h1>{quizName}</h1>
+            </div>
+            <ToggleColorTheme></ToggleColorTheme>
+        </header>
+    )
+}
+
+function ToggleColorTheme(){
+    return (
+        <label className="switchTheme">
+            <input type="checkbox"></input>
+            <span className="switch round"></span>
+        </label>
+    )
+}
