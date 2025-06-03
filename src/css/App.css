@@ -251,6 +251,11 @@ body {
   align-items: center;
   gap: 0 3.2rem;
   color: #313E51;
+  font-family: "Rubik";
+  font-size: 2.8rem;
+  font-weight: 500;
+  line-height: 100%;
+  letter-spacing: 0;
 }
 @media screen and (max-width: 450px) {
   .content {
@@ -277,16 +282,16 @@ body {
   width: 4rem;
   height: 4rem;
 }
-.iconContainer.HTML {
+.iconContainer.html {
   background-color: #FFF5ED;
 }
-.iconContainer.CSS {
+.iconContainer.css {
   background-color: #E0FDEF;
 }
-.iconContainer.Javascript {
+.iconContainer.javascript {
   background-color: #EBF0FF;
 }
-.iconContainer.Accessibility {
+.iconContainer.accessibility {
   background-color: #F6E7FF;
 }
 @media screen and (max-width: 450px) {

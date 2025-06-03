@@ -1,26 +1,22 @@
 import {OptionButton, AnswerBtnContent, SubmitButton, QuizThemeContent} from "../components/Button"
 import { useState, useEffect } from 'react';
 
-export default function Question({quizName}){
+export default function Question({currTheme}){
     const [questionNum, setQuestionNum] = useState(0);
+    const [activeBtn,  setActiveBtn]    = useState(false);
+    const [correctBtn, setcorrectBtn]   = useState(false);
+    const [wrongBtn,   setWrongBtn]     = useState(false);
 
-    // console.log(quizName.props.name)
-    // quizName = quizName.props.name;
-    quizName = "HTML"
-    // let title = JSON.parse(localStorage.getItem(quizName)).title
-    // console.log(title)
     let handleNextQuestion = () => {
         if(questionNum < 9) setQuestionNum(questionNum+1);
     }
-    let handleSelectBtn = () => {
-
+    let handleClick = (e) => {
+        setActiveBtn(true);
+        console.log(e.target)
     }
-
-    let data = JSON.parse(localStorage.getItem(quizName)).questions[questionNum];
-
-    let questionText = data.question;
-    let questionOptions = data.options;
-    let answer = data.answer;
+    let questionText = currTheme.questions[questionNum].question;
+    let questionOptions = currTheme.questions[questionNum].options;
+    let answer = currTheme.questions[questionNum].answer;
     return (
         <main className="main">
             <div className="questionContainer">
@@ -35,18 +31,13 @@ export default function Question({quizName}){
                 </div>
             </div>
             <div className="buttonGroup">
-                <OptionButton>
-                    <AnswerBtnContent letter={"A"}>{questionOptions[0]}</AnswerBtnContent>
-                </OptionButton>
-                <OptionButton>
-                    <AnswerBtnContent letter={"B"}>{questionOptions[1]}</AnswerBtnContent>
-                </OptionButton>
-                <OptionButton>
-                    <AnswerBtnContent letter={"C"}>{questionOptions[2]}</AnswerBtnContent>
-                </OptionButton>
-                <OptionButton>
-                    <AnswerBtnContent letter={"D"}>{questionOptions[3]}</AnswerBtnContent>
-                </OptionButton>
+                {
+                    questionOptions.map(option => (
+                        <OptionButton handle={handleClick}>
+                            <AnswerBtnContent letter={"A"}>{option}</AnswerBtnContent>
+                        </OptionButton>
+                    ))
+                }
             </div>
             <button onClick={handleNextQuestion}>Next question</button>
         </main>

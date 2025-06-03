@@ -110,6 +110,7 @@ body{
     @include flex(row, flex-start, center);
     gap: 0 3.2rem;
     color: $blue-900;
+    @include text-preset-4();
     // text-transform: uppercase;
     @media screen and (max-width:450px) {
         @include text-preset-4("mobile");
@@ -123,16 +124,16 @@ body{
         width:  4rem;
         height: 4rem;
     }
-    &.HTML{
+    &.html{
         background-color: $orange-50;
     }
-    &.CSS{
+    &.css{
         background-color: $green-100;
     } 
-    &.Javascript{
+    &.javascript{
         background-color: $blue-50;
     } 
-    &.Accessibility{
+    &.accessibility{
         background-color: $purple-100;
     }  
     border-radius: 1.2rem;

@@ -3,10 +3,12 @@ import {OptionButton, SubmitButton, QuizThemeContent} from "../components/Button
 import { useNavigate } from 'react-router-dom';
 
 export default function StartMenu(props){
+    let themes = props.themeData
     const navigate = useNavigate(); 
-    let handleClick = (name) => {
+    let handleClick = (e, name) => {
+        console.log(e.target)
         navigate('question', { replace: true });
-        props.onQuizName(name);
+        props.onCurrTheme(name);
     }
     return (
         <main className="main">
@@ -15,18 +17,13 @@ export default function StartMenu(props){
                 <p className='description'>Pick a subject to get started.</p>
             </div>
             <div className="buttonGroup">
-                <OptionButton handle={handleClick}>
-                    <QuizThemeContent name="HTML"></QuizThemeContent>
-                </OptionButton>
-                <OptionButton handle={handleClick}>
-                    <QuizThemeContent name="CSS"></QuizThemeContent>
-                </OptionButton>
-                <OptionButton handle={handleClick}>
-                    <QuizThemeContent name="Javascript"></QuizThemeContent>
-                </OptionButton>
-                <OptionButton handle={handleClick}>
-                    <QuizThemeContent name="Accessibility"></QuizThemeContent>
-                </OptionButton>
+                {
+                    themes.map(theme => (
+                        <OptionButton name={theme[0]} handle={handleClick}>
+                            <QuizThemeContent  name={theme[0]}>{theme[1]}</QuizThemeContent>
+                        </OptionButton>
+                    ))
+                }
             </div>
         </main>
     )
