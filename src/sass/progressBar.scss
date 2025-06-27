@@ -1,0 +1,31 @@
+.progressBarContainer{
+    width: 100%;
+    & progress{
+        width: 100%;
+    }
+    & progress[value] {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border: none;
+    }
+    & progress[value]::-webkit-progress-bar {
+        height: 1.6rem;
+        padding: .4rem;
+        border-radius: 100rem;
+        background: $white;
+        &.light{
+        }
+        &.dark{
+            background: $blue-850;
+        }            
+    }
+    & progress[value]::-webkit-progress-value {
+        border-radius: 100rem;
+        background: $purple-600;
+    }
+    & progress[value]::-moz-progress-bar {
+        border-radius: 100rem;
+        background: $purple-600;
+    }
+}
