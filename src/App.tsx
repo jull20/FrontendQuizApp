@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext, createContext } from 'react'
+import { useState, useEffect, createContext, cache } from 'react'
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import StartMenu from './pages/StartMenuPage'
 import Quiz from './pages/QuizPage'
@@ -25,9 +25,17 @@ const emptyScore: number = 0;
 
 export default function App() {
   const [score, setScore] = useState<number>(emptyScore);
-  const [theme, setTheme] = useState<string>("light");
-  let navigate = useNavigate();
+  const [theme, setTheme] = useState<string>(() => {
+    const cachedTheme = localStorage.getItem("theme");
+    if(cachedTheme) return cachedTheme;
+    else return "light";
+  });
+  const navigate = useNavigate();
 
+  const handleChangingTheme = (newTheme:string) => {
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme); 
+  }
   const loadQuizData = () => {
     try{
       const cachedData = localStorage.getItem("quizzes");
@@ -53,7 +61,7 @@ export default function App() {
     const cachedTopic = localStorage.getItem("selectedTopic");
     const isStorageHasPrevTopic = cachedTopic && cachedQuiz && JSON.parse(cachedTopic).text !== topic.text;
     if(isStorageHasPrevTopic || !cachedTopic && cachedQuiz) {
-      let newData: quizDataType[] = JSON.parse(cachedQuiz) 
+      const newData: quizDataType[] = JSON.parse(cachedQuiz) 
       localStorage.setItem("selectedTopic", JSON.stringify(findTopic(newData, "title", topic.text)))
     }
   }
@@ -74,7 +82,7 @@ export default function App() {
       <div className={'page ' + theme}>
         <div className="contentArea">
           <Header 
-            handleChangingTheme={(newTheme: string) => setTheme(newTheme)}
+            handleChangingTheme={handleChangingTheme}
             theme={theme} 
             />
           <Routes>
@@ -112,7 +120,7 @@ export default function App() {
 }
 
 function Header(props: {handleChangingTheme: (newTheme: string) => void, theme:string }){
-  let tryGetTopic = localStorage.getItem("selectedTopic");
+  const tryGetTopic = localStorage.getItem("selectedTopic");
   let data: quizDataType = emptyQuizData[0];
   if(tryGetTopic) data = JSON.parse(tryGetTopic);
 

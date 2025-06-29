@@ -15,7 +15,10 @@ html{
     min-height: 100vh;
     overflow-x: hidden;
     background-repeat: no-repeat;
-    @include flex(column, flex-start, center);
+    @include flex(column, center, center);
+    @media screen and (width: 1440px) and (height: 960px) {
+        @include flex(column, flex-start, center);
+    }
     &.light{
         background-color: $grey-50;
         @media screen and (max-width:450px) {
@@ -54,7 +57,9 @@ html{
     @media screen and (min-width:1024px) {
         width: clamp(30rem, 80.35vw, 130rem);
         gap: 8.5rem 0;
-        margin-top: 8.3rem;
+        @media screen and (height:960px) {
+            margin-top: 8.3rem;
+        }    
     }
 }
 .header{
@@ -87,7 +92,7 @@ html{
         gap: 2.4rem 0;
     }
 }
-.startMenuTextContainer{
+.titleTextContainer{
     min-width: 464px;
     text-align: left;
     &.light{
@@ -207,8 +212,6 @@ html{
     &.chosenAnswerIsCorrect:has(input:checked) { @include optinButtonState("choseCorrect") }
     &.chosenAnswerIsWrong:has(input:checked)   { @include optinButtonState("choseWrong") }
 }
-
-
 .iconState{
     width:  4rem;
     height: 4rem;
@@ -217,9 +220,6 @@ html{
         height: 3.2rem;
     }
 }
-
-
-
 .content{
     @include flex(row, flex-start, center);
     gap: 0 3.2rem;
@@ -333,8 +333,13 @@ html{
     gap: 4rem 0;
     padding: 4.8rem;
     border-radius: 2.4rem;
-    background-color: $white;
-    box-shadow: 0 1.6rem 4rem 0 rgba(143, 160, 193, 0.14);
+    &.light{
+        background-color: $white;
+        box-shadow: 0 1.6rem 4rem 0 rgba(143, 160, 193, 0.14);
+    }
+    &.dark{
+        background-color: $blue-850;
+    } 
     @media screen and (max-width:450px) {
         padding: 3.2rem;
         border-radius: 1.2rem;
@@ -343,7 +348,12 @@ html{
 }
 
 .score{
-    color: $blue-900;
+    &.light{
+        color: $blue-900;
+    }
+    &.dark{
+        color: $white;
+    } 
     @include text-preset-1;
     @media screen and (max-width:450px) {
         @include text-preset-1("mobile");
@@ -352,8 +362,13 @@ html{
 }
 .totalScore{
     margin-top: 1.6rem;
-    color: $grey-500;
-    @include text-preset-5($medium);
+    &.light{
+        color: $grey-500;
+    }
+    &.dark{
+        color: $blue-300;
+    } 
+    @include text-preset-5($regular);
     @media screen and (max-width:450px) {
         @include text-preset-4("mobile");
     }

@@ -146,16 +146,8 @@ html {
   background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-}
-@media screen and (width: 1440px) and (height: 960px) {
-  .page {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-  }
 }
 .page.light {
   background-color: #F4F6FA;
@@ -216,10 +208,6 @@ html {
   .contentArea {
     width: clamp(30rem, 80.35vw, 130rem);
     gap: 8.5rem 0;
-  }
-}
-@media screen and (min-width: 1024px) and (height: 960px) {
-  .contentArea {
     margin-top: 8.3rem;
   }
 }
@@ -279,17 +267,17 @@ html {
   }
 }
 
-.titleTextContainer {
+.startMenuTextContainer {
   min-width: 464px;
   text-align: left;
 }
-.titleTextContainer.light {
+.startMenuTextContainer.light {
   color: #313E51;
 }
-.titleTextContainer.dark {
+.startMenuTextContainer.dark {
   color: #FFFFFF;
 }
-.titleTextContainer .subtitle {
+.startMenuTextContainer .subtitle {
   margin-bottom: 1.6rem;
   font-family: "Rubik";
   font-size: 6.4rem;
@@ -298,7 +286,7 @@ html {
   letter-spacing: 0;
 }
 @media screen and (max-width: 450px) {
-  .titleTextContainer .subtitle {
+  .startMenuTextContainer .subtitle {
     font-family: "Rubik";
     font-size: 6.4rem;
     font-weight: 300;
@@ -308,11 +296,11 @@ html {
   }
 }
 @media screen and (min-width: 1024px) {
-  .titleTextContainer .subtitle {
+  .startMenuTextContainer .subtitle {
     margin-bottom: 4.8rem;
   }
 }
-.titleTextContainer .title {
+.startMenuTextContainer .title {
   margin-top: 0.8rem;
   font-family: "Rubik";
   font-size: 6.4rem;
@@ -321,7 +309,7 @@ html {
   letter-spacing: 0;
 }
 @media screen and (max-width: 450px) {
-  .titleTextContainer .title {
+  .startMenuTextContainer .title {
     font-family: "Rubik";
     font-size: 6.4rem;
     font-weight: 500;
@@ -330,21 +318,21 @@ html {
     font-size: 4rem;
   }
 }
-.titleTextContainer .description {
+.startMenuTextContainer .description {
   font-family: "Rubik";
   font-size: 2rem;
   font-style: italic;
   line-height: 150%;
   letter-spacing: 0;
 }
-.titleTextContainer .description.light {
+.startMenuTextContainer .description.light {
   color: #626C7F;
 }
-.titleTextContainer .description.dark {
+.startMenuTextContainer .description.dark {
   color: #ABC1E1;
 }
 @media screen and (max-width: 450px) {
-  .titleTextContainer .description {
+  .startMenuTextContainer .description {
     font-family: "Rubik";
     font-size: 2.4rem;
     font-weight: 500;
@@ -726,18 +714,13 @@ html {
 }
 
 .score {
+  color: #313E51;
   font-family: "Rubik";
   font-size: 14.4rem;
   font-weight: 500;
   line-height: 100%;
   letter-spacing: 0;
   text-align: center;
-}
-.score.light {
-  color: #313E51;
-}
-.score.dark {
-  color: #FFFFFF;
 }
 @media screen and (max-width: 450px) {
   .score {
@@ -752,17 +735,12 @@ html {
 
 .totalScore {
   margin-top: 1.6rem;
+  color: #626C7F;
   font-family: "Rubik";
   font-size: 2.4rem;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 150%;
   letter-spacing: 0;
-}
-.totalScore.light {
-  color: #626C7F;
-}
-.totalScore.dark {
-  color: #ABC1E1;
 }
 @media screen and (max-width: 450px) {
   .totalScore {
