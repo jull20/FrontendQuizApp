@@ -13,11 +13,11 @@
         height: 1.6rem;
         padding: .4rem;
         border-radius: 100rem;
-        background: $white;
         &.light{
+            background: $white;
         }
         &.dark{
-            background: $blue-850;
+            background: $blue;
         }            
     }
     & progress[value]::-webkit-progress-value {
