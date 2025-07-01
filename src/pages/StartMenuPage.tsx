@@ -3,13 +3,13 @@ import {Button} from "../components/Button"
 import type {quizDataType, btnContentType} from "../components/Types"
 import {ThemeContext} from "../App"
 
-export default function StartMenu({handleClick}: {handleClick: (btnContent:btnContentType) => void}){
+export default function StartMenu({quizData, handleClick}: {quizData: quizDataType[], handleClick: (btnContent:btnContentType) => void}){
     const theme = useContext(ThemeContext);
     let btnContent: Array<btnContentType> = [];
     const cachedData = localStorage.getItem("quizzes");
-    if(cachedData) {
-        btnContent = JSON.parse(cachedData).map((quizTopik: quizDataType) => {return {text: quizTopik.title, icon: quizTopik.icon}});
-    }
+    const arr = cachedData ? JSON.parse(cachedData) : quizData;
+    btnContent = arr.map((quizTopik: quizDataType) => {return {text: quizTopik.title, icon: quizTopik.icon}});
+    
     return (
         <main className="main">
             <div className={"titleTextContainer " + theme}>

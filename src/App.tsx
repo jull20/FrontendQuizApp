@@ -14,6 +14,7 @@ export const ThemeContext = createContext<string>("light");
 export default function App() {
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false); 
   const [score, setScore]                   = useState<number>(defaultScore);
+  const [quizData, setQuizData]             = useState<quizDataType[]>([defaultQuizData]);
   const [theme, setTheme]                   = useState<string>(defaultTheme);
   const navigate = useNavigate();
 
@@ -25,6 +26,7 @@ export default function App() {
         return response.json();
       }).then(data => {
         localStorage.setItem("quizzes", JSON.stringify(data["quizzes"]));
+        setQuizData(data);
       })
     }
   }
@@ -76,6 +78,7 @@ export default function App() {
               path='/' 
               element={
                 <StartMenu 
+                  quizData={quizData}
                   handleClick = {handleClickGoToQuiz}
                 />
               } 
