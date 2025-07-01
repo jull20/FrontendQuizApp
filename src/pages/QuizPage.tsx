@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import type {questionsType, btnContentType, quizComponentType} from "../components/Types"
+import type {questionsType, btnContentType, quizComponentPropsType} from "../components/Types"
 import {RadioButton} from "../components/Button"
 import {ThemeContext} from "../App"
 
@@ -10,8 +10,8 @@ const optionBtnIcons = [
     <path className='svgLetterPath' d="M16.0079 26C15.8879 26 15.7859 25.958 15.7019 25.874C15.6179 25.79 15.5759 25.688 15.5759 25.568V13.85C15.5759 13.718 15.6179 13.61 15.7019 13.526C15.7859 13.442 15.8879 13.4 16.0079 13.4H20.3999C21.6119 13.4 22.6079 13.586 23.3879 13.958C24.1799 14.33 24.7739 14.882 25.1699 15.614C25.5779 16.346 25.7879 17.24 25.7999 18.296C25.8239 18.824 25.8359 19.292 25.8359 19.7C25.8359 20.108 25.8239 20.57 25.7999 21.086C25.7759 22.202 25.5719 23.126 25.1879 23.858C24.8039 24.578 24.2219 25.118 23.4419 25.478C22.6739 25.826 21.6899 26 20.4899 26H16.0079ZM18.0779 23.93H20.3999C21.0719 23.93 21.6179 23.834 22.0379 23.642C22.4579 23.45 22.7639 23.144 22.9559 22.724C23.1599 22.292 23.2679 21.728 23.2799 21.032C23.2919 20.672 23.2979 20.36 23.2979 20.096C23.3099 19.82 23.3099 19.55 23.2979 19.286C23.2979 19.01 23.2919 18.698 23.2799 18.35C23.2559 17.366 23.0099 16.64 22.5419 16.172C22.0739 15.704 21.3299 15.47 20.3099 15.47H18.0779V23.93Z" fill="#626C7F"/>
 ]
 
-export default function Quiz({handleClickGoToScore, scoreIncrement}: quizComponentType){
-    const [questionNum,         setQuestionNum]         = useState<number>(0);
+export default function Quiz({handleClickGoToScore, scoreIncrement}: quizComponentPropsType){
+    const [questionNum,         setQuestionNum]         = useState<number>(Number(localStorage.getItem('currentQuestion')) ?? 0);
     const [userChoise,          setUserChoise]          = useState<string>("");
     const [isRadioDisabled,     setIsRadioDisabled]     = useState<boolean>(false);
     const [isBtnNextQVisible,   setIsBtnNextQVisible]   = useState<boolean>(false);
@@ -29,9 +29,10 @@ export default function Quiz({handleClickGoToScore, scoreIncrement}: quizCompone
 
     const handleClickNextQuestion = () => {
         if(questionNum < questionsAmount-1) {
-            setQuestionNum        (questionNum         => ++questionNum);
-            setIsRadioDisabled      (isRadioDisabled       => !isRadioDisabled);
+            setQuestionNum      (questionNum       => ++questionNum);
+            setIsRadioDisabled  (isRadioDisabled   => !isRadioDisabled);
             setIsBtnNextQVisible(isBtnNextQVisible => !isBtnNextQVisible);
+            localStorage.setItem('currentQuestion', String(questionNum+1));
         }
     }
 
@@ -39,19 +40,16 @@ export default function Quiz({handleClickGoToScore, scoreIncrement}: quizCompone
         event.preventDefault()
         if(isRadioSelected){
             setIsErrorVisible(false);
-            let data = Object.fromEntries(new FormData(event.currentTarget))
-            let userAnswer: string = String(data.answerOption)
-            setUserChoise       (userAnswer)
+            let data = Object.fromEntries(new FormData(event.currentTarget));
+            let userAnswer: string = String(data.answerOption);
+            setUserChoise       (userAnswer);
             setIsRadioDisabled  (isRadioDisabled   => !isRadioDisabled);
             setIsBtnNextQVisible(isBtnNextQVisible => !isBtnNextQVisible);
             setIsRadioSelected  (false);
             if(userAnswer === questions[questionNum].answer) scoreIncrement();
             if(questionNum === questionsAmount-1) setIsBtnResultsVisible(true);
         }
-        else{
-            setIsErrorVisible(true);
-            console.log("not selected")
-        }
+        else setIsErrorVisible(true);
     }
     
     return (
@@ -59,9 +57,7 @@ export default function Quiz({handleClickGoToScore, scoreIncrement}: quizCompone
             <div className="questionContainer">
                 <div className="questionTextContainer">
                     <p className={"questionNum " + theme}>Question <span>{questionNum+1}</span> of 10</p>
-                    <h1 className={'questionText ' + theme}>
-                        {questions[questionNum].question}
-                    </h1>
+                    <h1 className={'questionText ' + theme}> {questions[questionNum].question} </h1>
                 </div>
                 <div className="progressBarContainer">
                     <progress className={theme} id="progress-bar" value={questionNum+1} max="10"></progress>

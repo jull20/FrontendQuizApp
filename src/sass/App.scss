@@ -16,6 +16,8 @@ html{
     overflow-x: hidden;
     background-repeat: no-repeat;
     @include flex(column, flex-start, center);
+    @media screen and (width: 1440px) and (height: 960px) {
+    }
     &.light{
         background-color: $grey-50;
         @media screen and (max-width:450px) {
@@ -49,12 +51,14 @@ html{
     @media screen and (min-width:450px) and (max-width:1024px) {
         width: clamp(30rem, 83.5vw, 83rem);
         gap: 5rem 0;
-        margin-top: 4rem;
+        margin-top: clamp(.1rem, 3.91vh, 10rem);
+        margin-bottom: clamp(.1rem, 2vh, 10rem);
     }
     @media screen and (min-width:1024px) {
         width: clamp(30rem, 80.35vw, 130rem);
         gap: 8.5rem 0;
-        margin-top: 8.3rem;
+        margin-top:    clamp(2rem, 8.66vh, 15rem);
+        margin-bottom: clamp(.1rem, 3vh, 15rem);
     }
 }
 .header{
@@ -65,6 +69,7 @@ html{
     }
 }
 .main{
+    gap: 6.4rem 0;
     width: 100%;
     @include flex(column, flex-start, flex-start);
     @media screen and (max-width:450px) {
@@ -72,11 +77,22 @@ html{
         padding: 3.2rem 2.4rem;
     }
     @media screen and (min-width:450px) and (max-width:1024px) {
-        gap: 6.4rem 0;
+        @media (orientation: portrait){
+            @include flex(column, flex-start, flex-start);
+        }
+        @media (orientation: landscape){
+            gap: 0 6.4rem; 
+            @include flex(row, flex-start, flex-start);
+        }
     }
     @media screen and (min-width:1024px) {
-        @include flex(row, flex-start, flex-start);
-        gap: 0 12.8rem;
+        @media (orientation: portrait){
+            @include flex(column, flex-start, flex-start);
+        }
+        @media (orientation: landscape){
+            gap: 0 12.8rem; 
+            @include flex(row, flex-start, flex-start);
+        }
     }
 }
 .buttonGroup{
@@ -87,7 +103,7 @@ html{
         gap: 2.4rem 0;
     }
 }
-.startMenuTextContainer{
+.titleTextContainer{
     min-width: 464px;
     text-align: left;
     &.light{
@@ -150,14 +166,16 @@ html{
 }
 .answerOptionsContainer{
     width: 100%;
-    flex-shrink: 0;
     @include flex(column, flex-start, center);
     gap: 3.2rem 0;
     @media screen and (max-width:450px) {
         gap: 1.6rem 0;
     }
     @media screen and (min-width:1024px) {
-        width: 49%;
+        @media (orientation: landscape){
+            flex-shrink: 0;
+            width: 49%;
+        }
     }
 }
 .form{
@@ -180,16 +198,7 @@ html{
 .radio
 {
     position: relative;
-    width: 100%;
     padding: 1.6rem 1.6rem;
-    &.light{
-        background-color: $white;
-        box-shadow: 0 1.6rem 4rem 0 rgba(143, 160, 193, 0.14);
-    }
-    &.dark{
-        background-color: $blue-850;
-    }
-    border-radius: 2.4rem;
     text-align: left;
     @include text-preset-4;
     @include flex(row, space-between, center);
@@ -208,6 +217,17 @@ html{
     &.chosenAnswerIsWrong:has(input:checked)   { @include optinButtonState("choseWrong") }
 }
 
+.contentConainer{
+    width: 100%;
+    border-radius: 2.4rem;
+    &.light{
+        background-color: $white;
+        box-shadow: 0 1.6rem 4rem 0 rgba(143, 160, 193, 0.14);
+    }
+    &.dark{
+        background-color: $blue-850;
+    } 
+}
 
 .iconState{
     width:  4rem;
@@ -217,9 +237,6 @@ html{
         height: 3.2rem;
     }
 }
-
-
-
 .content{
     @include flex(row, flex-start, center);
     gap: 0 3.2rem;
@@ -283,7 +300,11 @@ html{
         gap: 4rem 0;
     }
     @media screen and (min-width:1024px) {
-        gap: 18.4rem 0;
+        @media (orientation: landscape){
+            gap: 18.4rem 0;
+        }
+        @media (orientation: landscape){
+        }
     }
 }
 .questionTextContainer{
@@ -328,13 +349,9 @@ html{
     }
 }
 .resultContent{
-    width: 100%;
     @include flex(column, center, center);
     gap: 4rem 0;
     padding: 4.8rem;
-    border-radius: 2.4rem;
-    background-color: $white;
-    box-shadow: 0 1.6rem 4rem 0 rgba(143, 160, 193, 0.14);
     @media screen and (max-width:450px) {
         padding: 3.2rem;
         border-radius: 1.2rem;
@@ -343,7 +360,12 @@ html{
 }
 
 .score{
-    color: $blue-900;
+    &.light{
+        color: $blue-900;
+    }
+    &.dark{
+        color: $white;
+    } 
     @include text-preset-1;
     @media screen and (max-width:450px) {
         @include text-preset-1("mobile");
@@ -352,8 +374,13 @@ html{
 }
 .totalScore{
     margin-top: 1.6rem;
-    color: $grey-500;
-    @include text-preset-5($medium);
+    &.light{
+        color: $grey-500;
+    }
+    &.dark{
+        color: $blue-300;
+    } 
+    @include text-preset-5($regular);
     @media screen and (max-width:450px) {
         @include text-preset-4("mobile");
     }
@@ -368,4 +395,37 @@ html{
     @media screen and (max-width:450px) {
         @include text-preset-4("mobile");
     }
+}
+
+
+.modalContainer{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    @include flex(row, center, center);
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+}
+.modalContent{
+    &.light{ color: $blue-900; }
+    &.dark { color: $white; }
+    @include text-preset-3;
+    @media screen and (max-width:450px) {
+        @include text-preset-3("mobile");
+        width: 90vw;
+    }
+    @media screen and (min-width:450px) and (max-width:1024px) {
+        width: clamp(30rem, 83.5vw, 60rem);
+    }
+    @media screen and (min-width:1024px) {
+        width: clamp(30rem, 45vw, 130rem);
+    }
+    & .closeButton{
+        background-color: $blue-900;
+    }
+}
+.modalBtnGroup{
+    width: 100%;
+    @include flex(row, center, center);
+    gap: 0 3rem;
 }

@@ -1,20 +1,20 @@
 import { useContext, type JSXElementConstructor } from "react";
-import type {btnContentType, radioButtonType} from "./Types"
+import type {btnContentType, radioButtonType, buttonPropsType} from "./Types"
 import {ThemeContext} from "../App"
 
 
-export function Button(props: {btnContent: btnContentType, handleClick: (btnContent:btnContentType) => void}){
+export function Button(props: buttonPropsType){
     const theme = useContext(ThemeContext);
     let btnContent: btnContentType = props.btnContent,
         handleClick = props.handleClick;
     return (
-        <button className={"btn optionButton " + theme} onClick={()=>handleClick(btnContent)}>
+        <button className={"btn contentConainer optionButton " + theme} onClick={()=>handleClick(btnContent)}>
             <ButtonContent content={btnContent} />
         </button>
     )
 }
 
-export function ButtonContent({content}: {content: btnContentType}){
+export function ButtonContent({content, handleClick}: {content: btnContentType, handleClick?: ()=>void}){
     const theme = useContext(ThemeContext);
     let img = null;
     const typeOfIcon: Array<string> = ["html", "css", "javascript", "accessibility"]
@@ -26,7 +26,7 @@ export function ButtonContent({content}: {content: btnContentType}){
                 </svg>
                </>
     return(
-        <div className={"content " + theme}>
+        <div className={"content " + theme} onClick={handleClick}>
             {
                 content.text 
                 ? <>
@@ -60,7 +60,7 @@ export function RadioButton({btnContent, id, isAnswer, userChoise, isRadioDisabl
     }
     
     return (
-        <label onChange={handleChange} className={"radio " + style} >
+        <label onChange={handleChange} className={"radio contentConainer " + style} >
             <input {...disabled} type="radio" id={id} value={btnContent.text} name="answerOption"/>
             <ButtonContent content={btnContent}/>
             <img className="iconState" style={{display: isRadioDisabled && answerStateUrl!=="null" ? "" : "none"}} src={answerStateUrl} alt="" />

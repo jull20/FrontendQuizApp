@@ -99,14 +99,6 @@ input:checked + .switch:before {
   }
 }
 
-@font-face {
-  font-family: "Rubik";
-  src: url(./../assets/fonts/Rubik-VariableFont_wght.ttf);
-}
-.hidden {
-  display: none;
-}
-
 .progressBarContainer {
   width: 100%;
 }
@@ -123,11 +115,9 @@ input:checked + .switch:before {
   height: 1.6rem;
   padding: 0.4rem;
   border-radius: 100rem;
-}
-.progressBarContainer progress[value].light::-webkit-progress-bar {
   background: #FFFFFF;
 }
-.progressBarContainer progress[value].dark::-webkit-progress-bar {
+.progressBarContainer progress[value]::-webkit-progress-bar.dark {
   background: #3B4D66;
 }
 .progressBarContainer progress[value]::-webkit-progress-value {
@@ -211,16 +201,14 @@ html {
   .contentArea {
     width: clamp(30rem, 83.5vw, 83rem);
     gap: 5rem 0;
-    margin-top: clamp(0.1rem, 3.91vh, 10rem);
-    margin-bottom: clamp(0.1rem, 2vh, 10rem);
+    margin-top: 4rem;
   }
 }
 @media screen and (min-width: 1024px) {
   .contentArea {
     width: clamp(30rem, 80.35vw, 130rem);
     gap: 8.5rem 0;
-    margin-top: clamp(2rem, 8.66vh, 15rem);
-    margin-bottom: clamp(0.1rem, 3vh, 15rem);
+    margin-top: 8.3rem;
   }
 }
 
@@ -238,7 +226,6 @@ html {
 }
 
 .main {
-  gap: 6.4rem 0;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -251,38 +238,18 @@ html {
     padding: 3.2rem 2.4rem;
   }
 }
-@media screen and (min-width: 450px) and (max-width: 1024px) and (orientation: portrait) {
+@media screen and (min-width: 450px) and (max-width: 1024px) {
   .main {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
+    gap: 6.4rem 0;
   }
 }
-@media screen and (min-width: 450px) and (max-width: 1024px) and (orientation: landscape) {
+@media screen and (min-width: 1024px) {
   .main {
-    gap: 0 6.4rem;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: flex-start;
-  }
-}
-@media screen and (min-width: 1024px) and (orientation: portrait) {
-  .main {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-  }
-}
-@media screen and (min-width: 1024px) and (orientation: landscape) {
-  .main {
     gap: 0 12.8rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: flex-start;
   }
 }
 
@@ -300,17 +267,17 @@ html {
   }
 }
 
-.titleTextContainer {
+.startMenuTextContainer {
   min-width: 464px;
   text-align: left;
 }
-.titleTextContainer.light {
+.startMenuTextContainer.light {
   color: #313E51;
 }
-.titleTextContainer.dark {
+.startMenuTextContainer.dark {
   color: #FFFFFF;
 }
-.titleTextContainer .subtitle {
+.startMenuTextContainer .subtitle {
   margin-bottom: 1.6rem;
   font-family: "Rubik";
   font-size: 6.4rem;
@@ -319,7 +286,7 @@ html {
   letter-spacing: 0;
 }
 @media screen and (max-width: 450px) {
-  .titleTextContainer .subtitle {
+  .startMenuTextContainer .subtitle {
     font-family: "Rubik";
     font-size: 6.4rem;
     font-weight: 300;
@@ -329,11 +296,11 @@ html {
   }
 }
 @media screen and (min-width: 1024px) {
-  .titleTextContainer .subtitle {
+  .startMenuTextContainer .subtitle {
     margin-bottom: 4.8rem;
   }
 }
-.titleTextContainer .title {
+.startMenuTextContainer .title {
   margin-top: 0.8rem;
   font-family: "Rubik";
   font-size: 6.4rem;
@@ -342,7 +309,7 @@ html {
   letter-spacing: 0;
 }
 @media screen and (max-width: 450px) {
-  .titleTextContainer .title {
+  .startMenuTextContainer .title {
     font-family: "Rubik";
     font-size: 6.4rem;
     font-weight: 500;
@@ -351,21 +318,21 @@ html {
     font-size: 4rem;
   }
 }
-.titleTextContainer .description {
+.startMenuTextContainer .description {
   font-family: "Rubik";
   font-size: 2rem;
   font-style: italic;
   line-height: 150%;
   letter-spacing: 0;
 }
-.titleTextContainer .description.light {
+.startMenuTextContainer .description.light {
   color: #626C7F;
 }
-.titleTextContainer .description.dark {
+.startMenuTextContainer .description.dark {
   color: #ABC1E1;
 }
 @media screen and (max-width: 450px) {
-  .titleTextContainer .description {
+  .startMenuTextContainer .description {
     font-family: "Rubik";
     font-size: 2.4rem;
     font-weight: 500;
@@ -413,6 +380,7 @@ html {
 
 .answerOptionsContainer {
   width: 100%;
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -424,9 +392,8 @@ html {
     gap: 1.6rem 0;
   }
 }
-@media screen and (min-width: 1024px) and (orientation: landscape) {
+@media screen and (min-width: 1024px) {
   .answerOptionsContainer {
-    flex-shrink: 0;
     width: 49%;
   }
 }
@@ -457,7 +424,9 @@ html {
 .optionButton,
 .radio {
   position: relative;
+  width: 100%;
   padding: 1.6rem 1.6rem;
+  border-radius: 2.4rem;
   text-align: left;
   font-family: "Rubik";
   font-size: 2.8rem;
@@ -470,6 +439,15 @@ html {
   align-items: center;
   gap: 0 3.2rem;
   transition: 100ms;
+}
+.optionButton.light,
+.radio.light {
+  background-color: #FFFFFF;
+  box-shadow: 0 1.6rem 4rem 0 rgba(143, 160, 193, 0.14);
+}
+.optionButton.dark,
+.radio.dark {
+  background-color: #3B4D66;
 }
 @media screen and (min-width: 1024px) {
   .optionButton,
@@ -522,18 +500,6 @@ html {
 .optionButton.chosenAnswerIsWrong:has(input:checked) .svgLetterPath,
 .radio.chosenAnswerIsWrong:has(input:checked) .svgLetterPath {
   fill: #FFFFFF;
-}
-
-.contentConainer {
-  width: 100%;
-  border-radius: 2.4rem;
-}
-.contentConainer.light {
-  background-color: #FFFFFF;
-  box-shadow: 0 1.6rem 4rem 0 rgba(143, 160, 193, 0.14);
-}
-.contentConainer.dark {
-  background-color: #3B4D66;
 }
 
 .iconState {
@@ -638,11 +604,12 @@ html {
     gap: 4rem 0;
   }
 }
-@media screen and (min-width: 1024px) and (orientation: landscape) {
+@media screen and (min-width: 1024px) {
   .questionContainer {
     gap: 18.4rem 0;
   }
 }
+
 .questionTextContainer {
   width: 100%;
   gap: 2.4rem 0;
@@ -722,12 +689,21 @@ html {
 }
 
 .resultContent {
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 4rem 0;
   padding: 4.8rem;
+  border-radius: 2.4rem;
+}
+.resultContent.light {
+  background-color: #FFFFFF;
+  box-shadow: 0 1.6rem 4rem 0 rgba(143, 160, 193, 0.14);
+}
+.resultContent.dark {
+  background-color: #3B4D66;
 }
 @media screen and (max-width: 450px) {
   .resultContent {
@@ -738,18 +714,13 @@ html {
 }
 
 .score {
+  color: #313E51;
   font-family: "Rubik";
   font-size: 14.4rem;
   font-weight: 500;
   line-height: 100%;
   letter-spacing: 0;
   text-align: center;
-}
-.score.light {
-  color: #313E51;
-}
-.score.dark {
-  color: #FFFFFF;
 }
 @media screen and (max-width: 450px) {
   .score {
@@ -764,17 +735,12 @@ html {
 
 .totalScore {
   margin-top: 1.6rem;
+  color: #626C7F;
   font-family: "Rubik";
   font-size: 2.4rem;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 150%;
   letter-spacing: 0;
-}
-.totalScore.light {
-  color: #626C7F;
-}
-.totalScore.dark {
-  color: #ABC1E1;
 }
 @media screen and (max-width: 450px) {
   .totalScore {
@@ -812,65 +778,6 @@ html {
     letter-spacing: 0;
     font-size: 1.8rem;
   }
-}
-
-.modalContainer {
-  width: 100vw;
-  height: 100vh;
-  position: absolute;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.6);
-  z-index: 1000;
-}
-
-.modalContent {
-  font-family: "Rubik";
-  font-size: 3.6rem;
-  font-weight: 500;
-  line-height: 120%;
-  letter-spacing: 0;
-}
-.modalContent.light {
-  color: #313E51;
-}
-.modalContent.dark {
-  color: #FFFFFF;
-}
-@media screen and (max-width: 450px) {
-  .modalContent {
-    font-family: "Rubik";
-    font-size: 3.6rem;
-    font-weight: 500;
-    line-height: 120%;
-    letter-spacing: 0;
-    font-size: 2rem;
-    width: 90vw;
-  }
-}
-@media screen and (min-width: 450px) and (max-width: 1024px) {
-  .modalContent {
-    width: clamp(30rem, 83.5vw, 60rem);
-  }
-}
-@media screen and (min-width: 1024px) {
-  .modalContent {
-    width: clamp(30rem, 45vw, 130rem);
-  }
-}
-.modalContent .closeButton {
-  background-color: #313E51;
-}
-
-.modalBtnGroup {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 0 3rem;
 }
 
 /*# sourceMappingURL=App.css.map */

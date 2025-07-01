@@ -1,81 +1,75 @@
-import { useState, useEffect, useContext, createContext } from 'react'
+import { useState, useEffect, createContext, useContext } from 'react'
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import StartMenu from './pages/StartMenuPage'
 import Quiz from './pages/QuizPage'
 import Score from './pages/ScorePage'
 import ToggleColorTheme from "./components/ToggleColorTheme"
 import {ButtonContent} from "./components/Button"
-import type {quizDataType, btnContentType} from "./components/Types"
+import type {quizDataType, btnContentType, headerPropsType, modalContentPropsType} from "./components/Types"
+import {defaultQuizData, defaultScore, defaultTheme} from "./components/DefaultValues"
 import './css/App.css'
 
 export const ThemeContext = createContext<string>("light");
 
-
-const emptyQuizData:quizDataType[]  = [{
-  title: "",
-  icon: "",
-  questions: [{
-    question: "",
-    options: [""],
-    answer: ""
-  }]
-}]
-// const emptySelectedTopic: btnContentType = {text: "",icon: ""};
-const emptyScore: number = 0; 
-
 export default function App() {
-  const [score, setScore] = useState<number>(emptyScore);
-  const [theme, setTheme] = useState<string>("light");
-  let navigate = useNavigate();
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false); 
+  const [score, setScore]                   = useState<number>(defaultScore);
+  const [theme, setTheme]                   = useState<string>(defaultTheme);
+  const navigate = useNavigate();
 
   const loadQuizData = () => {
-    try{
-      const cachedData = localStorage.getItem("quizzes");
-      if(!cachedData){
-        console.log("new data")
-        fetch("data.json").then(response => {
-          if(!response.ok) console.log("bad data") 
-          return response.json();
-        }).then(data => {
-          localStorage.setItem("quizzes", JSON.stringify(data["quizzes"]));
-        })
-      }
-    }catch(error){
-      console.log(error)
+    const cachedData = localStorage.getItem("quizzes");
+    if(!cachedData){
+      fetch("data.json").then(response => {
+        if(!response.ok) console.log("bad data") 
+        return response.json();
+      }).then(data => {
+        localStorage.setItem("quizzes", JSON.stringify(data["quizzes"]));
+      })
     }
   }
   const returnToDefaultSettings = () => {
-    setScore(emptyScore);
-    localStorage.removeItem("selectedTopic")
+    setScore(defaultScore);
+    localStorage.removeItem("selectedTopic");
+    localStorage.removeItem("currentQuestion");
   }
   const cachingSelectedTopic = (topic:btnContentType) => {
     const cachedQuiz  = localStorage.getItem("quizzes");
     const cachedTopic = localStorage.getItem("selectedTopic");
     const isStorageHasPrevTopic = cachedTopic && cachedQuiz && JSON.parse(cachedTopic).text !== topic.text;
     if(isStorageHasPrevTopic || !cachedTopic && cachedQuiz) {
-      let newData: quizDataType[] = JSON.parse(cachedQuiz) 
-      localStorage.setItem("selectedTopic", JSON.stringify(findTopic(newData, "title", topic.text)))
+      const newData: quizDataType[] = JSON.parse(cachedQuiz)
+      const selectedTopic: quizDataType | undefined = newData.find((obj: quizDataType) => obj.title === topic.text) 
+      localStorage.setItem("selectedTopic", JSON.stringify(selectedTopic));
     }
+  }
+  const scoreIncrement = () => { if(score < 10) setScore(score => score+1); }
+  const handleChangingTheme = (newTheme:string) => {
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme); 
   }
   const handleClickGoToQuiz = (btnContent:btnContentType) => {
     cachingSelectedTopic(btnContent);
-    navigate("/quiz-page", {replace: true})
+    navigate("/quiz-page", {replace: true});
   }
   const handleClickGoToScore     = () => navigate("/score-page", {replace: true}) 
   const handleClickGoToStartMenu = () => {
-    navigate("/", {replace: true})
+    navigate("/", {replace: true});
     returnToDefaultSettings();
-  }
-  const scoreIncrement = () => { if(score < 10) setScore(score => score+1); }
+    setIsModalVisible(false);
 
+  }
   useEffect(() => loadQuizData(), []);
+
   return (
     <ThemeContext value={theme}>
-      <div className={'page ' + theme}>
+      <div id='page' className={'page ' + theme}>
+        {isModalVisible && <ModalContent handleCloseClick={() => setIsModalVisible(false)} handleClickToStart={handleClickGoToStartMenu}/>}
         <div className="contentArea">
           <Header 
-            handleChangingTheme={(newTheme: string) => setTheme(newTheme)}
-            theme={theme} 
+            handleChangingTheme={handleChangingTheme}
+            theme={theme}
+            handleClickModalContent={() => setIsModalVisible(true)} 
             />
           <Routes>
             <Route 
@@ -111,20 +105,31 @@ export default function App() {
   )
 }
 
-function Header(props: {handleChangingTheme: (newTheme: string) => void, theme:string }){
-  let tryGetTopic = localStorage.getItem("selectedTopic");
-  let data: quizDataType = emptyQuizData[0];
-  if(tryGetTopic) data = JSON.parse(tryGetTopic);
 
-  return(
-    <header className='header'>
-      <ButtonContent content={{text: data.title, icon: data.icon}}/>
-      <ToggleColorTheme {...props}/>
-    </header>
+function ModalContent({handleCloseClick, handleClickToStart}: modalContentPropsType){
+  const theme = useContext(ThemeContext);
+  return (
+    <div className="modalContainer">
+      <div className={"modalContent resultContent contentConainer " + theme}>
+        <p>Are you sure you want to go to the start menu?</p>
+        <div className="modalBtnGroup">
+          <button className='btn serviceButton' onClick={handleClickToStart}>Go</button>
+          <button className='btn serviceButton closeButton' onClick={handleCloseClick}>Close</button>
+        </div>
+      </div>
+    </div>
   )
 }
 
-function findTopic(arr: Array<quizDataType>, key: string, value: string): quizDataType | undefined {
-  return arr.find((obj: quizDataType) => obj[key] === value);
+function Header(props: headerPropsType){
+  const tryGetTopic = localStorage.getItem("selectedTopic");
+  let selectedTopic: quizDataType = defaultQuizData;
+  if(tryGetTopic) selectedTopic = JSON.parse(tryGetTopic);
 
+  return(
+    <header className='header'>
+      <ButtonContent content={{text: selectedTopic.title, icon: selectedTopic.icon}} handleClick={props.handleClickModalContent}/>
+      <ToggleColorTheme {...props}/>
+    </header>
+  )
 }
