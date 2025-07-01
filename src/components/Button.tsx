@@ -1,4 +1,4 @@
-import { useContext, type JSXElementConstructor } from "react";
+import { useContext } from "react";
 import type {btnContentType, radioButtonType, buttonPropsType} from "./Types"
 import {ThemeContext} from "../App"
 
