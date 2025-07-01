@@ -102,7 +102,7 @@ $medium:       500;
     align-items:     $cross-axis;
 }
 @mixin optinButtonState($state){
-    $accentColor: #000;
+    $accentColor: #ff0000;
     @if($state == "active")       {$accentColor: $purple-600}
     @if($state == "choseWrong")   {$accentColor: $red}
     @if($state == "choseCorrect") {$accentColor: $green-500}
