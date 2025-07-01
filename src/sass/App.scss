@@ -215,7 +215,7 @@ html{
         gap: 0 1.6rem;
     }
     .quizPage &:hover,
-    &:has(input:checked)   { @include optinButtonState("active")}
+    &:has(input:checked),&:has(input:active),&:has(input:focus-visible){ @include optinButtonState("active")}
     &.chosenAnswerIsCorrect:has(input:checked) { @include optinButtonState("choseCorrect") }
     &.chosenAnswerIsWrong:has(input:checked)   { @include optinButtonState("choseWrong") }
 }

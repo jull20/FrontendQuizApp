@@ -106,10 +106,6 @@ $medium:       500;
     @if($state == "active")       {$accentColor: $purple-600}
     @if($state == "choseWrong")   {$accentColor: $red}
     @if($state == "choseCorrect") {$accentColor: $green-500}
-    // @if($state == "correctAnswer"){
-    //     outline: none;
-
-    // }
     outline: .3rem solid $accentColor;
     & .svgBgPath{
         fill: $accentColor;
