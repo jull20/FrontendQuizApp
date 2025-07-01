@@ -88,7 +88,8 @@ export default function Quiz({handleClickGoToScore, scoreIncrement}: quizCompone
                         className={'btn serviceButton submit'} 
                         style={{
                             display: !isBtnNextQVisible ? "" : "none",
-                            backgroundColor: isRadioSelected ? "#A729F5" : ""
+                            backgroundColor: isRadioSelected ? "#A729F5" : "",
+                            cursor: isRadioSelected ? "pointer" : "not-allowed",
                         }}
                     >Submit Answer</button> 
                 </form>

@@ -14,7 +14,7 @@ export function Button(props: buttonPropsType){
     )
 }
 
-export function ButtonContent({content, handleClick}: {content: btnContentType, handleClick?: ()=>void}){
+export function ButtonContent({content, handleClick, style}: {content: btnContentType, handleClick?: ()=>void, style?: React.CSSProperties}){
     const theme = useContext(ThemeContext);
     let img = null;
     const typeOfIcon: Array<string> = ["html", "css", "javascript", "accessibility"]
@@ -26,7 +26,7 @@ export function ButtonContent({content, handleClick}: {content: btnContentType, 
                 </svg>
                </>
     return(
-        <div className={"content " + theme} onClick={handleClick}>
+        <div className={"content " + theme} onClick={handleClick} style={style}>
             {
                 content.text 
                 ? <>

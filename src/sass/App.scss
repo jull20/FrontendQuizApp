@@ -152,6 +152,7 @@ html{
     border-radius: 2.4rem;
     background-color: $purple-600;
     color: $white;
+    cursor: pointer;
     @include text-preset-4;
     @media screen and (max-width:450px) {
         padding: 1.6rem;
@@ -193,10 +194,12 @@ html{
     height: 100%;
     top: 0;
     left: 0;
+    cursor: pointer;
 }
 .optionButton,
 .radio
 {
+    cursor: pointer;
     position: relative;
     padding: 1.6rem 1.6rem;
     text-align: left;

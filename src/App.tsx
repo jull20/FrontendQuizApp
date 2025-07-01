@@ -131,7 +131,11 @@ function Header(props: headerPropsType){
 
   return(
     <header className='header'>
-      <ButtonContent content={{text: selectedTopic.title, icon: selectedTopic.icon}} handleClick={props.handleClickModalContent}/>
+      <ButtonContent 
+        content={{text: selectedTopic.title, icon: selectedTopic.icon}} 
+        handleClick={props.handleClickModalContent}
+        style={{cursor: "pointer"}}
+      />
       <ToggleColorTheme {...props}/>
     </header>
   )
