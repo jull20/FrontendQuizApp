@@ -882,4 +882,8 @@ html {
   gap: 0 3rem;
 }
 
+input:target {
+  background-color: chartreuse;
+}
+
 /*# sourceMappingURL=App.css.map */
