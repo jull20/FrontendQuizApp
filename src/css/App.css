@@ -479,6 +479,24 @@ html {
   .radio {
     padding: 2.4rem 2.4rem;
   }
+  .quizPage .optionButton:hover, .optionButton:has(input:active), .optionButton:has(input:focus),
+  .quizPage .radio:hover,
+  .radio:has(input:active),
+  .radio:has(input:focus) {
+    outline: 0.3rem solid #A729F5;
+  }
+  .quizPage .optionButton:hover .svgBgPath, .optionButton:has(input:active) .svgBgPath, .optionButton:has(input:focus) .svgBgPath,
+  .quizPage .radio:hover .svgBgPath,
+  .radio:has(input:active) .svgBgPath,
+  .radio:has(input:focus) .svgBgPath {
+    fill: #A729F5;
+  }
+  .quizPage .optionButton:hover .svgLetterPath, .optionButton:has(input:active) .svgLetterPath, .optionButton:has(input:focus) .svgLetterPath,
+  .quizPage .radio:hover .svgLetterPath,
+  .radio:has(input:active) .svgLetterPath,
+  .radio:has(input:focus) .svgLetterPath {
+    fill: #FFFFFF;
+  }
 }
 @media screen and (max-width: 450px) {
   .optionButton,
@@ -487,25 +505,16 @@ html {
     gap: 0 1.6rem;
   }
 }
-.quizPage .optionButton:hover, .optionButton:has(input:checked), .optionButton:has(input:active), .optionButton:has(input:focus),
-.quizPage .radio:hover,
-.radio:has(input:checked),
-.radio:has(input:active),
-.radio:has(input:focus) {
+.optionButton:has(input:checked),
+.radio:has(input:checked) {
   outline: 0.3rem solid #A729F5;
 }
-.quizPage .optionButton:hover .svgBgPath, .optionButton:has(input:checked) .svgBgPath, .optionButton:has(input:active) .svgBgPath, .optionButton:has(input:focus) .svgBgPath,
-.quizPage .radio:hover .svgBgPath,
-.radio:has(input:checked) .svgBgPath,
-.radio:has(input:active) .svgBgPath,
-.radio:has(input:focus) .svgBgPath {
+.optionButton:has(input:checked) .svgBgPath,
+.radio:has(input:checked) .svgBgPath {
   fill: #A729F5;
 }
-.quizPage .optionButton:hover .svgLetterPath, .optionButton:has(input:checked) .svgLetterPath, .optionButton:has(input:active) .svgLetterPath, .optionButton:has(input:focus) .svgLetterPath,
-.quizPage .radio:hover .svgLetterPath,
-.radio:has(input:checked) .svgLetterPath,
-.radio:has(input:active) .svgLetterPath,
-.radio:has(input:focus) .svgLetterPath {
+.optionButton:has(input:checked) .svgLetterPath,
+.radio:has(input:checked) .svgLetterPath {
   fill: #FFFFFF;
 }
 .optionButton.chosenAnswerIsCorrect:has(input:checked),
