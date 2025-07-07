@@ -456,8 +456,8 @@ html {
   cursor: pointer;
 }
 .radio input:checked {
-  background-color: rgba(211, 148, 250, 0.5843137255);
-  border: 5px solid greenyellow;
+  background-color: none;
+  border: none;
 }
 
 .optionButton,

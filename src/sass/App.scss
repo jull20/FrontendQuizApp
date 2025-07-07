@@ -196,8 +196,8 @@ html{
     left: 0;
     cursor: pointer;
     &:checked{
-        background-color: #d394fa95;
-        border: 5px solid greenyellow;
+        background-color: none;
+        border: none;
     }
 }
 .optionButton,
